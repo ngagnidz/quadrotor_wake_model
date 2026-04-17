@@ -88,7 +88,8 @@ model_new/
 ├── sigma_z_fit.py         # fits a linear trend to sigma(z)
 ├── amplitude_decay_fit.py # fits exponential trends to Ai(z) and Ao(z)
 ├── wake_model.py          # assembles the final model with all 10 constants
-└── predict_profile.py     # plots PIV data against model predictions
+├── predict_profile.py     # plots PIV data against model predictions (2D contour)
+└── plot_radial_fits.py    # plots per-slice radial profiles: PIV vs double-Gaussian fit
 ```
 
 ---
@@ -132,7 +133,8 @@ r = 0.700 l,  z = 2.000 l
 
 **Step 4 - visualise predictions against PIV data:**
 ```bash
-python3 model_new/predict_profile.py
+python3 model_new/predict_profile.py        # 2D contour: PIV vs global model
+python3 model_new/plot_radial_fits.py       # 6-panel radial profiles: PIV vs per-slice fit
 ```
 
 ---

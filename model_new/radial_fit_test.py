@@ -89,7 +89,7 @@ u_all = u_piv.ravel()           # [U_i]
 # BLOCK 4 — Results storage
 # ---------------------------------------------------------------------------
 
-n = len(Z_LEVELS)   # 6 slices
+n = len(Z_LEVELS)
 
 results = {
     "z":     Z_LEVELS,
@@ -158,7 +158,11 @@ for k, z0 in enumerate(Z_LEVELS):
     # We start amplitudes at 0.6 (typical near-field value),
     # sigma at 0.3 l (a reasonable ring width),
     # and radii at the known geometric positions.
-    p0 = [0.6, 0.6, 0.3, R_INNER_GEOM, R_OUTER_GEOM]
+    if k == 0 or np.isnan(results["R2"][k - 1]):
+        p0 = [0.6, 0.6, 0.3, R_INNER_GEOM, R_OUTER_GEOM]
+    else:
+        p0 = [results["Ai"][k-1], results["Ao"][k-1], results["sigma"][k-1],
+              results["Ri"][k-1], results["Ro"][k-1]]
 
     # Nelder-Mead: a derivative-free simplex search.
     # Good choice here because the cost function has hard jumps (the 1e9 wall)
@@ -183,7 +187,7 @@ for k, z0 in enumerate(Z_LEVELS):
     results["R2"][k] = r_squared(u_act, u_pred_act)
 
 # ---------------------------------------------------------------------------
-# BLOCK 6 — Save results to CSV
+# BLOCK 7 — Save results to CSV
 # ---------------------------------------------------------------------------
 
 import csv

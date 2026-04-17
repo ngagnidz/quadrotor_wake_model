@@ -20,7 +20,6 @@ z_data  = data[:, 0]
 Ri_data = data[:, 4]
 Ro_data = data[:, 5]
 
-# Linear fit
 pi = np.polyfit(z_data, Ri_data, 1)
 po = np.polyfit(z_data, Ro_data, 1)
 beta_i, Ri0 = pi[0], pi[1]
