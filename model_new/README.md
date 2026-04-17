@@ -19,10 +19,10 @@ A quadrotor in hover pushes air downward. Below the rotor plane, this creates a 
 ## The model
 
 ```math
-u(r, z) = A_i(z) \cdot \mathcal{G}\!\left(r - R_i(z),\, \sigma(z)\right) \;+\; A_o(z) \cdot \mathcal{G}\!\left(r - R_o(z),\, \sigma(z)\right)
+u(r, z) = A_i(z) \cdot \mathcal{G}\left(r - R_i(z),\, \sigma(z)\right) \;+\; A_o(z) \cdot \mathcal{G}\left(r - R_o(z),\, \sigma(z)\right)
 ```
 
-where $\mathcal{G}(x,\, \sigma) = \exp\!\left(-\dfrac{x^2}{2\sigma^2}\right)$ is an amplitude-normalised Gaussian.
+where $\mathcal{G}(x, \sigma) = \exp\left(-\dfrac{x^2}{2\sigma^2}\right)$ is an amplitude-normalised Gaussian.
 
 The five $z$-dependent parameters follow simple laws:
 
@@ -59,13 +59,13 @@ All quantities are non-dimensionalised:
 | Length | $l$ | $32.5\ \text{mm}$ (Crazyflie arm length) |
 | Velocity | $U_i$ | induced velocity at hover |
 
-So $r,\, z,\, R_i,\, R_o,\, \sigma$ are in units of $[l]$, and $u,\, A_i,\, A_o$ are in units of $[U_i]$.
+So $r, z, R_i, R_o, \sigma$ are in units of $[l]$, and $u, A_i, A_o$ are in units of $[U_i]$.
 
 ---
 
 ## Fitted constants
 
-Fitted from 251 $z$-slices ($z = 1.0$ to $3.5\, l$, step $= 0.01\, l$):
+Fitted from 251 $z$-slices ($z = 1.0$ to $3.5\ l$, step $= 0.01\ l$):
 
 | Parameter | Value | Description |
 |---|---|---|
@@ -133,7 +133,7 @@ python3 model_new/sigma_z_fit.py
 python3 model_new/amplitude_decay_fit.py
 ```
 
-**Step 3 — query the model at any point** $(r,\, z)$:
+**Step 3 — query the model at any point** $(r, z)$:
 ```bash
 python3 model_new/wake_model.py <r> <z>
 ```
@@ -149,4 +149,14 @@ r = 0.700 l,  z = 2.000 l
 **Step 4 — visualise:**
 ```bash
 python3 model_new/predict_profile.py
+```
+
+---
+
+## Validation
+
+Global RMSE over the full PIV domain ($z = 1.0$–$3.5\ l$, 13 600 points):
+
+```math
+\text{RMSE} = \pm 0.0313\ U_i
 ```
