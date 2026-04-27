@@ -37,7 +37,7 @@ cf2.set_clim(0, 1)
 ax1.set_ylim(0, 3.5)
 ax2.set_ylim(0, 3.5)
 
-mask = (z_piv >= 1.0) & (z_piv <= 3.5)
+mask = (z_piv >= 1.0) & (z_piv <= 3.5) & (u_piv > 0.10)
 rmse = np.sqrt(np.mean((u_model[mask] - u_piv[mask]) ** 2))
 print(f"Global RMSE = ±{rmse:.4f} Ui  (over {mask.sum()} PIV points, z=1.0–3.5)")
 

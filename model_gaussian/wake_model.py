@@ -79,8 +79,9 @@ if __name__ == "__main__":
     else:
         u_local   = u_piv[mask]
         u_pred_local = u_wake(r_piv[mask], z_piv[mask])
-        rmse = float(np.sqrt(np.mean((u_pred_local - u_local) ** 2)))
-        err_str = f"±{rmse:.4f} Ui  (RMSE over {mask.sum()} nearby PIV points)"
+        rmse  = float(np.sqrt(np.mean((u_pred_local - u_local) ** 2)))
+        nrmse = rmse / float(np.mean(u_local))
+        err_str = f"±{rmse:.4f} Ui  ({100*nrmse:.1f}% of local mean)  over {mask.sum()} nearby PIV points"
 
     print(f"\nr = {r_in:.3f} l,  z = {z_in:.3f} l")
     print(f"  predicted u = {u_pred:.4f} Ui")
